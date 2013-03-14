@@ -39,28 +39,16 @@ except IOError:
 
 install_requires=[
     'setuptools',
-    'Chameleon >= 1.2.3',
-    'Mako >= 0.3.6', # strict_undefined
-    'WebOb >= 1.2b3', # request.path_info is unicode
-    'repoze.lru >= 0.4', # py3 compat
     'zope.interface >= 3.8.0',  # has zope.interface.registry
     'zope.deprecation >= 3.5.0', # py3 compat
-    'venusian >= 1.0a3', # ``ignore``
-    'translationstring >= 0.4', # py3 compat
-    'PasteDeploy >= 1.5.0', # py3 compat
     ]
 
 tests_require = [
-    'WebTest >= 1.3.1', # py3 compat
     ]
-
-if not PY3:
-    tests_require.append('zope.component>=3.11.0')
 
 docs_extras = [
     'Sphinx',
     'docutils',
-    'repoze.sphinx.autointerface',
     ]
 
 testing_extras = tests_require + [
@@ -69,10 +57,10 @@ testing_extras = tests_require + [
     'virtualenv', # for scaffolding tests
     ]
 
-setup(name='pyramid',
-      version='1.4',
-      description=('The Pyramid web application development framework, a '
-                   'Pylons project'),
+setup(name='pcreate',
+      version='0.1',
+      description=('The pcreate scaffolding development framework, a '
+                   'Pyramid project'),
       long_description=README + '\n\n' +  CHANGES,
       classifiers=[
         "Intended Audience :: Developers",
@@ -107,20 +95,8 @@ setup(name='pyramid',
       entry_points = """\
         [pyramid.scaffold]
         starter=pyramid.scaffolds:StarterProjectTemplate
-        zodb=pyramid.scaffolds:ZODBProjectTemplate
-        alchemy=pyramid.scaffolds:AlchemyProjectTemplate
         [console_scripts]
-        bfg2pyramid = pyramid.fixers.fix_bfg_imports:main
         pcreate = pyramid.scripts.pcreate:main
-        pserve = pyramid.scripts.pserve:main
-        pshell = pyramid.scripts.pshell:main
-        proutes = pyramid.scripts.proutes:main
-        pviews = pyramid.scripts.pviews:main
-        ptweens = pyramid.scripts.ptweens:main
-        prequest = pyramid.scripts.prequest:main
-        [paste.server_runner]
-        wsgiref = pyramid.scripts.pserve:wsgiref_server_runner
-        cherrypy = pyramid.scripts.pserve:cherrypy_server_runner
       """
       )
 
