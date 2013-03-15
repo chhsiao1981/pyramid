@@ -121,6 +121,7 @@ class TypeMapper(dict):
 
     def __getitem__(self, item):
         options = item.split('|')
+        value = None
         for op in options[:-1]:
             try:
                 value = eval_with_catch(op, dict(self.items()))
@@ -128,9 +129,12 @@ class TypeMapper(dict):
             except (NameError, KeyError):
                 pass
         else:
-            value = eval(options[-1], dict(self.items()))
+            try:
+                value = eval(options[-1], dict(self.items()))
+            except:
+                pass
         if value is None:
-            return ''
+            return '{{' + str(options[0]) + '}}'
         else:
             return str(value)
 
